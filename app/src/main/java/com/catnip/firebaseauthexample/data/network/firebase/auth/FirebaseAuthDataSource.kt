@@ -2,6 +2,7 @@ package com.catnip.firebaseauthexample.data.network.firebase.auth
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -25,7 +26,7 @@ class FirebaseAuthDataSourceImpl(private val firebaseAuth: FirebaseAuth): Fireba
     }
 
     override fun doLogout(): Boolean {
-        Firebase.auto.signOut()
+        Firebase.auth.signOut()
         return true
     }
 
@@ -43,6 +44,5 @@ class FirebaseAuthDataSourceImpl(private val firebaseAuth: FirebaseAuth): Fireba
         val loginResult = firebaseAuth.signInWithEmailAndPassword(email, password).await()
         return loginResult.user != null
     }
-
 
 }
